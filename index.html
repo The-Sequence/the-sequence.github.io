@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+        <title>My Profile</title>
+    </head>
+
+    <body>
+        <div class="navbar">
+            <h2>
+                <a href="index.html">Activity 4</a>
+                <a href="activity2.html">Activity 2</a>
+                <a href="activity3.html">Activity 3</a>
+            </h2>
+            <div class="navbar-controls">
+                <button id="themeBtn">Toggle Dark Mode</button>
+                <button id="fontDecreaseBtn" title="Decrease Font Size">A-</button>
+                <button id="fontIncreaseBtn" title="Increase Font Size">A+</button>
+                <input type="color" id="bgColorPicker" title="Background Color" value="#e5e7eb">
+                <input type="color" id="textColorPicker" title="Text Color" value="#1f2937">
+            </div>
+        </div>
+
+        <div class="page-wrapper">
+            <!-- Time Display with Greeting at Top -->
+            <div class="time-greeting-header">
+                <div class="date-display" id="dateDisplay"></div>
+                <div class="time-display" id="timeDisplay"></div>
+                <div class="timezone-display" id="timezoneDisplay"></div>
+                <div class="greeting-text" id="greetingText"></div>
+            </div>
+
+            <hr>
+
+            <!--Reorganized Layout: About section first, then profile info and form side by side-->
+            <div id="about" class="about-section">
+                <h2>About Me</h2>
+                <p>I am an aspiring software engineer who is currently studying at National University - Fairview.</p>
+                
+                <!-- Random Quote Generator -->
+                <div class="quote-section" style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #4b5563;">
+                    <p id="quoteDisplay" style="font-style: italic; font-size: 1.1rem; color: #4b5563; margin: 0 0 15px 0;">Click the button below for a motivational quote!</p>
+                    <button id="quoteBtn" style="padding: 10px 20px; background: #4b5563; color: white; border: none; border-radius: 6px; cursor: pointer;">Get New Quote</button>
+                </div>
+            </div>
+            
+            <!-- Slideshow Section -->
+            <div class="slideshow-section">
+                <h2>Image Slideshow</h2>
+                <div class="slideshow-container">
+                    <div class="slideshow-image-wrapper">
+                        <img id="slideshowImage" src="src/El Capitan.jpg" alt="Slideshow Image">
+                        <button id="prevSlideBtn" class="slide-nav-btn prev-btn">❮</button>
+                        <button id="nextSlideBtn" class="slide-nav-btn next-btn">❯</button>
+                    </div>
+                    <div class="slideshow-controls">
+                        <button id="autoSlideBtn" class="auto-slide-btn">Start Auto Slideshow</button>
+                        <span id="slideCounter" class="slide-counter">1 / 5</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <!--2-Column Layout-->
+            <table class="profile-layout">
+                <tr>
+                    <!--LEFT COLUMN-->
+                    <td class="left-column">
+                        <div id="home">
+                            <img src="src/2x2.jpg" alt="profile picture" class="profile-img" id="profileImg">
+                            <h2>Aenard Ollyer Royo</h2>
+                            <span class="job-title" id="jobTitle">IT Student</span>
+                            <br><br>
+                            <button id="editJobBtn">Edit Job Title</button>
+                            <button id="changeProfileBtn">Change Profile Picture</button>
+                        </div>
+
+                        <hr>
+
+                        <div>
+                            <h3>Contact</h3>
+                            <p><strong>Email:</strong> royoaenard@gmail.com</p>
+                            <p><strong>Phone:</strong> 09477300696</p>
+                            <p><strong>Address:</strong> Manila, Philippines</p>
+                        </div>
+
+                        <hr>
+
+                        <div id="skillsSection">
+                            <h3>Skills</h3>
+                            <button id="toggleSkillsBtn">Hide Skills</button>
+                            <input type="text" id="skillSearchInput" placeholder="Search skills..." style="width: 100%; padding: 8px; margin-top: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                            <dl id="skillsList">
+                                <dt class="skill-item">C++</dt>
+                                <dt class="skill-item">Python</dt>
+                            </dl>
+                        </div>
+                        
+                        <hr>
+                        
+                        <!-- Age Calculator -->
+                        <div class="feature-section">
+                            <h3>Age Calculator</h3>
+                            <p>Enter your birth year:</p>
+                            <input type="number" id="birthYearInput" placeholder="e.g., 2000" min="1900" max="2025" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                            <p id="ageDisplay" style="font-weight: bold; color: #4b5563; margin-top: 10px;"></p>
+                        </div>
+                    </td>
+
+                    <!--RIGHT COLUMN-->
+                    <td class="right-column">
+                        <div class="message-form">
+                            <h2>Message Me</h2>
+                            <form action="submit" method="post">
+                                <p>
+                                    <label for="nameField">Name:</label>
+                                    <input type="text" id="nameField" name="name" required>
+                                </p>
+                                <p>
+                                    <label for="emailField">Email:</label>
+                                    <input type="email" id="emailField" name="email" required>
+                                </p>
+                                <p>
+                                    <label for="msgBox">Your Message:</label>
+                                </p>
+                                <p>
+                                    <textarea id="msgBox" name="w3review" rows="4" cols="50" maxlength="200"></textarea>
+                                </p>
+                                <p>Characters left: <span id="counter">200</span></p>
+                                <p>
+                                    <input type="submit" value="Send" onclick="return validateForm()">
+                                </p>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <!--Footer-->
+            <footer>
+                <strong>WebProg - Web Programming 2025</strong>
+                <p id="dateDisplay"></p>
+            </footer>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style-activity2.css">
+        <title>Activity 2 - HTML</title>
+    </head>
+
+    <body>
+        <!-- Simple Navigation-->
+         <div class="navbar">
+
+            <h2>
+                <a href="index.html">Activity 4</a>
+                <a href="activity2.html">Activity 2</a>
+                <a href="activity3.html">Activity 3</a>
+            </h2>
+
+         </div>
+
+         <hr>
+
+         <!--2-Column Layout-->
+         <table>
+            <tr>
+                <!--LEFT COLUMN-->
+                <td class="left-column">
+                    <div id = "home">
+                        <img src = "src/2x2.jpg" alt = "profile picture" class="profile-img">
+                        <h2> Aenard Ollyer Royo</h2>
+                        <span class="job-title">IT Student</span>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <h3>Contact</h3>
+                        <p>Email: royoaenard@gmail.com</p>
+                        <p>Phone: 09477300696</p>
+                        <p>Address: Manila, Philippines</p>
+                    </div>
+
+                    <hr>
+                    <div>
+                        <h3>Skills</h3>
+                        <dl>
+                            <dt>C++</dt>
+                            <dt>Python</dt>
+                        </dl>
+                    </div>
+                </td>
+
+                <!--RIGHT COLUMN-->
+                <td class="right-column">
+                    <div id = "about">
+                        <br>
+                        <h2>About Me</h2>
+                        <p>I am an aspiring software engineer who is currently studying at National University - Fairview.</p>
+                    </div>
+
+                    <hr>
+
+                    <div class = "message-form">
+                        <h2>Message Me</h2>
+                        <form action = "submit" method = "post">
+                            <p>
+                                Name: <input type = "text" name = "name" required>
+                            </p>
+                            <p>
+                                Email: <input type = "email" name = "email" required>
+                            </p>
+                            <p>Your Message:</p>
+                                <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
+                            <p>
+                                <input type = "submit" value = "Send">
+                            </p>
+                            
+                        </form>
+                    </div>
+                </td>
+            </tr>
+         </table>
+
+         <hr>
+
+         <!--Footer-->
+         <div>
+            <p><center><strong>WebProg - Web Programming 2025</strong></center></p>
+         </div>
+    </body>
+</html>

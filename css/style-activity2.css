@@ -1,0 +1,43 @@
+.navbar a {
+text-decoration: none;
+padding: 10px;
+}
+.navbar a:hover {
+color: rgb(23, 222, 149);
+}
+
+#home {
+display: flex;
+max-width: 1100px;
+}
+.left-column {
+flex: 1;
+width: 50%;
+}
+.right-column {
+flex: 2;
+width: 50%;
+}
+
+.profile-img {
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.job-title {
+    color: gray;
+    font-style: italic;
+}
+
+.message-form input[type="text"],
+.message-form input[type="email"] {
+    width: 90%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.message-form input[type="submit"] {
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
