@@ -531,20 +531,14 @@ function hexToRgba(hex, alpha) {
 // Feature 6: Simple Slideshow / Carousel
 // ============================================
 const slideshowImages = [
-    'src/El Capitan.jpg',
     'src/Mavericks.jpg',
     'src/Tsunagu.jpg',
     'src/Ventura.jpg',
-    'src/Yosemite.jpg'
+    'src/2x2.jpg'
 ];
 
 // Color schemes for each image - matching the aesthetic of each slide
 const slideshowColorSchemes = [
-    { // El Capitan - Mountain/rock theme - cool grays and blues
-        background: '#d1d5db',
-        accent: '#6b7280',
-        text: '#1f2937'
-    },
     { // Mavericks - Ocean/surf theme - blues and teals
         background: '#e0f2fe',
         accent: '#0ea5e9',
@@ -560,10 +554,10 @@ const slideshowColorSchemes = [
         accent: '#10b981',
         text: '#064e3b'
     },
-    { // Yosemite - Nature theme - warm earth tones
-        background: '#fef3c7',
-        accent: '#f59e0b',
-        text: '#78350f'
+    { // 2x2 - Profile photo theme - neutral grays
+        background: '#f3f4f6',
+        accent: '#4b5563',
+        text: '#1f2937'
     }
 ];
 
