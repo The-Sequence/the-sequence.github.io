@@ -284,7 +284,7 @@ function toggleDarkMode() {
     }
     
     // Re-apply slideshow theme if slideshow is active
-    if (slideshowImages.length > 0) {
+    if (validSlideshowImages.length > 0) {
         updateThemeFromSlide(currentSlideIndex);
     }
 }
@@ -561,15 +561,80 @@ const slideshowColorSchemes = [
     }
 ];
 
+// Filtered arrays that only contain valid images
+let validSlideshowImages = [];
+let validSlideshowColorSchemes = [];
+
 let currentSlideIndex = 0;
 let autoSlideInterval = null;
 let originalBackground = null;
 let originalTextColor = null;
 
-function updateThemeFromSlide(slideIndex) {
-    if (slideIndex < 0 || slideIndex >= slideshowColorSchemes.length) return;
+// Function to validate images and filter out ones that fail to load
+function validateSlideshowImages() {
+    validSlideshowImages = [];
+    validSlideshowColorSchemes = [];
     
-    const colorScheme = slideshowColorSchemes[slideIndex];
+    // Use Promise.all to check all images
+    const imagePromises = slideshowImages.map((imagePath, index) => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                resolve({ path: imagePath, index: index, valid: true });
+            };
+            img.onerror = () => {
+                console.warn(`Image failed to load: ${imagePath}`);
+                resolve({ path: imagePath, index: index, valid: false });
+            };
+            img.src = imagePath;
+        });
+    });
+    
+    Promise.all(imagePromises).then(results => {
+        results.forEach(result => {
+            if (result.valid) {
+                validSlideshowImages.push(result.path);
+                validSlideshowColorSchemes.push(slideshowColorSchemes[result.index]);
+            }
+        });
+        
+        // Update slideshow if images are loaded
+        if (validSlideshowImages.length > 0) {
+            const slideshowImage = getElementById('slideshowImage');
+            const slideCounter = getElementById('slideCounter');
+            if (slideshowImage) {
+                currentSlideIndex = 0;
+                slideshowImage.src = validSlideshowImages[0];
+            }
+            if (slideCounter) {
+                slideCounter.textContent = `1 / ${validSlideshowImages.length}`;
+            }
+            updateThemeFromSlide(0);
+        } else {
+            console.error('No valid slideshow images found');
+            const slideshowImage = getElementById('slideshowImage');
+            const slideCounter = getElementById('slideCounter');
+            const nextSlideBtn = getElementById('nextSlideBtn');
+            const prevSlideBtn = getElementById('prevSlideBtn');
+            const autoSlideBtn = getElementById('autoSlideBtn');
+            
+            if (slideshowImage) {
+                slideshowImage.style.display = 'none';
+            }
+            if (slideCounter) {
+                slideCounter.textContent = '0 / 0';
+            }
+            if (nextSlideBtn) nextSlideBtn.disabled = true;
+            if (prevSlideBtn) prevSlideBtn.disabled = true;
+            if (autoSlideBtn) autoSlideBtn.disabled = true;
+        }
+    });
+}
+
+function updateThemeFromSlide(slideIndex) {
+    if (slideIndex < 0 || slideIndex >= validSlideshowColorSchemes.length) return;
+    
+    const colorScheme = validSlideshowColorSchemes[slideIndex];
     const isDarkMode = document.body.classList.contains('dark-mode');
     
     // Store original colors if not already stored
@@ -645,15 +710,15 @@ function updateThemeFromSlide(slideIndex) {
 function showSlide(index) {
     const slideshowImage = getElementById('slideshowImage');
     const slideCounter = getElementById('slideCounter');
-    if (slideshowImage) {
+    if (slideshowImage && validSlideshowImages.length > 0) {
         currentSlideIndex = index;
         if (currentSlideIndex < 0) {
-            currentSlideIndex = slideshowImages.length - 1;
+            currentSlideIndex = validSlideshowImages.length - 1;
         }
-        if (currentSlideIndex >= slideshowImages.length) {
+        if (currentSlideIndex >= validSlideshowImages.length) {
             currentSlideIndex = 0;
         }
-        slideshowImage.src = slideshowImages[currentSlideIndex];
+        slideshowImage.src = validSlideshowImages[currentSlideIndex];
         slideshowImage.style.opacity = '0';
         setTimeout(() => {
             slideshowImage.style.opacity = '1';
@@ -661,7 +726,7 @@ function showSlide(index) {
         
         // Update slide counter
         if (slideCounter) {
-            slideCounter.textContent = `${currentSlideIndex + 1} / ${slideshowImages.length}`;
+            slideCounter.textContent = `${currentSlideIndex + 1} / ${validSlideshowImages.length}`;
         }
         
         // Update theme based on current slide
@@ -847,13 +912,13 @@ function initialize() {
     if (autoSlideBtn) {
         autoSlideBtn.addEventListener('click', toggleAutoSlide);
     }
-    // Initialize slide counter
+    // Initialize slide counter (will be updated after image validation)
     const slideCounter = getElementById('slideCounter');
     if (slideCounter) {
         slideCounter.textContent = `1 / ${slideshowImages.length}`;
     }
-    // Initialize theme from first slide
-    updateThemeFromSlide(0);
+    // Validate images and filter out ones that fail to load
+    validateSlideshowImages();
     
     // Feature 7: Age Calculator
     const birthYearInput = getElementById('birthYearInput');
