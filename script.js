@@ -533,8 +533,7 @@ function hexToRgba(hex, alpha) {
 const slideshowImages = [
     'src/Mavericks.jpg',
     'src/Tsunagu.jpg',
-    'src/Ventura.jpg',
-    'src/2x2.jpg'
+    'src/Ventura.jpg'
 ];
 
 // Color schemes for each image - matching the aesthetic of each slide
@@ -553,11 +552,6 @@ const slideshowColorSchemes = [
         background: '#d1fae5',
         accent: '#10b981',
         text: '#064e3b'
-    },
-    { // 2x2 - Profile photo theme - neutral grays
-        background: '#f3f4f6',
-        accent: '#4b5563',
-        text: '#1f2937'
     }
 ];
 
@@ -933,6 +927,20 @@ function initialize() {
         skillSearchInput.addEventListener('input', filterSkills);
         skillSearchInput.addEventListener('keyup', filterSkills);
     }
+    
+    // Spoiler reveal functionality for contact info
+    const spoilers = document.querySelectorAll('.spoiler');
+    spoilers.forEach(spoiler => {
+        spoiler.addEventListener('click', function() {
+            if (!this.classList.contains('revealed')) {
+                const actualText = this.getAttribute('data-spoiler');
+                if (actualText) {
+                    this.textContent = actualText;
+                    this.classList.add('revealed');
+                }
+            }
+        });
+    });
     
     console.log("JavaScript initialized successfully!");
 }

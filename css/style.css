@@ -1136,3 +1136,42 @@ html {
         font-size: 1rem;
     }
 }
+
+/* Spoiler Effect for Contact Information */
+.spoiler {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #f3f4f6;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.spoiler:hover {
+    background: #e5e7eb;
+}
+
+.spoiler.revealed {
+    color: inherit;
+    text-shadow: none;
+    background: transparent;
+    cursor: default;
+}
+
+.dark-mode .spoiler {
+    background: #374151;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode .spoiler:hover {
+    background: #4b5563;
+}
+
+.dark-mode .spoiler.revealed {
+    background: transparent;
+    text-shadow: none;
+}
